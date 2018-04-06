@@ -356,6 +356,8 @@ public final class MainActivity extends AppCompatActivity {
          */
         String caption = RecognizePhoto.getCaption(jsonResult);
         Log.d(TAG, caption);
+        Log.d(TAG, "cat: " + RecognizePhoto.isACat(jsonResult,0.8));
+        Log.d(TAG, "dog: " + RecognizePhoto.isADog(jsonResult,0.8));
     }
 
     /** Current bitmap we are working with. */

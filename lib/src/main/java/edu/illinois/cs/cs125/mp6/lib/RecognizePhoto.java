@@ -79,6 +79,19 @@ public final class RecognizePhoto {
      * @return a boolean indicating whether the image contains a dog or false on failure
      */
     public static boolean isADog (final String json, double minConfidence) {
+        JsonElement jsonElement = new JsonParser().parse(json);
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        JsonArray jsonArray = jsonObject.getAsJsonArray("tags");
+        if (jsonArray == null) { return false; }
+        for (int i = 0; i < jsonArray.size(); i++) {
+            if (jsonArray.get(i).getAsJsonObject().get("name").getAsString()
+                    .toLowerCase().contains("dog")) {
+                if (jsonArray.get(i).getAsJsonObject().get("confidence").getAsDouble() >= minConfidence) {
+                    return true;
+                }
+                break;
+            }
+        }
         return false;
     }
 
@@ -93,6 +106,19 @@ public final class RecognizePhoto {
      * @return a boolean indicating whether the image contains a dog or false on failure
      */
     public static boolean isACat (final String json, double minConfidence) {
+        JsonElement jsonElement = new JsonParser().parse(json);
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        JsonArray jsonArray = jsonObject.getAsJsonArray("tags");
+        if (jsonArray == null) { return false; }
+        for (int i = 0; i < jsonArray.size(); i++) {
+            if (jsonArray.get(i).getAsJsonObject().get("name").getAsString()
+                    .toLowerCase().contains("cat")) {
+                if (jsonArray.get(i).getAsJsonObject().get("confidence").getAsDouble() >= minConfidence) {
+                    return true;
+                }
+                break;
+            }
+        }
         return false;
     }
 
