@@ -337,9 +337,12 @@ public final class MainActivity extends AppCompatActivity {
          */
         int width = RecognizePhoto.getWidth(jsonResult);
         int height = RecognizePhoto.getHeight(jsonResult);
+        Log.d(TAG,jsonResult);
+        Log.d(TAG,width + ", " + height);
         String format = RecognizePhoto.getFormat(jsonResult);
+        Log.d(TAG, format);
         format = format.toUpperCase();
-        String description = String.format(Locale.US, "%s (%d x %d)", format, width, height);
+        String description = String.format(Locale.US, "image of type %s and size (%d x %d)", format, width, height);
 
         /*
          * Update the UI to display the string.
@@ -351,6 +354,8 @@ public final class MainActivity extends AppCompatActivity {
          * Add code here to show the caption, show or hide the dog and cat icons,
          * and deal with Rick.
          */
+        String caption = RecognizePhoto.getCaption(jsonResult);
+        Log.d(TAG, caption);
     }
 
     /** Current bitmap we are working with. */

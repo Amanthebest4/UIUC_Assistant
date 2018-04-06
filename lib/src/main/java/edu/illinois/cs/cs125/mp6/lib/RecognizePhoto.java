@@ -1,7 +1,11 @@
 package edu.illinois.cs.cs125.mp6.lib;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import sun.rmi.runtime.Log;
 
 //import jdk.nashorn.internal.parser.JSONParser;
 
@@ -16,9 +20,9 @@ public final class RecognizePhoto {
      * @return the width of the image or 0 on failure
      */
     public static int getWidth(final String json) {
-        JsonParser parser = new JsonParser();
-        JsonObject widthObject = parser.parse(json).getAsJsonObject();
-        int width = widthObject.get("width").getAsInt();
+        JsonElement jsonElement = new JsonParser().parse(json);
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        int width = jsonObject.getAsJsonObject("metadata").get("width").getAsInt();
         return width;
     }
 
@@ -29,9 +33,9 @@ public final class RecognizePhoto {
      * @return the width of the image or 0 on failure
      */
     public static int getHeight(final String json) {
-        JsonParser parser = new JsonParser();
-        JsonObject heightObject = parser.parse(json).getAsJsonObject();
-        int height = heightObject.get("height").getAsInt();
+        JsonElement jsonElement = new JsonParser().parse(json);
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        int height = jsonObject.getAsJsonObject("metadata").get("height").getAsInt();
         return height;
     }
 
@@ -42,9 +46,9 @@ public final class RecognizePhoto {
      * @return the type of the image or null
      */
     public static String getFormat(final String json) {
-        JsonParser parser = new JsonParser();
-        JsonObject formatObject = parser.parse(json).getAsJsonObject();
-        String format = formatObject.get("format").getAsString();
+        JsonElement jsonElement = new JsonParser().parse(json);
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        String format = jsonObject.getAsJsonObject("metadata").get("format").getAsString();
         return format;
     }
 
@@ -56,11 +60,12 @@ public final class RecognizePhoto {
      * @return the caption describing the image created by the Microsoft or null on failure
      */
     public static String getCaption(final String json) {
-        JsonParser parser = new JsonParser();
-        JsonObject captionObject = parser.parse(json).getAsJsonObject();
-        String caption = captionObject.get("captions").getAsString();
-        System.out.println(caption);
+        JsonElement jsonElement = new JsonParser().parse(json);
+        JsonObject jsonObject = jsonElement.getAsJsonObject().getAsJsonObject("description");
+        JsonArray jsonArray = jsonObject.getAsJsonArray("captions");
+        String caption = jsonArray.get(0).getAsJsonObject().get("text").getAsString();
         return caption;
+        //return jsonObject.toString();
     }
 
     /**
