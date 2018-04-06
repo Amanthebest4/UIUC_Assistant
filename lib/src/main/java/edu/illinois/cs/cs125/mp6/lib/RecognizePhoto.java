@@ -5,10 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import sun.rmi.runtime.Log;
-
-//import jdk.nashorn.internal.parser.JSONParser;
-
 public final class RecognizePhoto {
 
 
