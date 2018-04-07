@@ -358,6 +358,7 @@ public final class MainActivity extends AppCompatActivity {
         //Log.d(TAG, caption);
         Log.d(TAG, "cat: " + RecognizePhoto.isACat(jsonResult,0.8));
         Log.d(TAG, "dog: " + RecognizePhoto.isADog(jsonResult,1.0));
+        Log.d(TAG, "rick: " + RecognizePhoto.isRick(jsonResult));
     }
 
     /** Current bitmap we are working with. */

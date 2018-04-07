@@ -97,21 +97,21 @@ public final class RecognizePhoto {
         if (jsonArray == null) {
             return false;
         }
-        if (jsonArray.size() == 0) {
-            System.out.println("null");
-        }
+//        if (jsonArray.size() == 0) {
+//            System.out.println("null");
+//        }
         for (int i = 0; i < jsonArray.size(); i++) {
             if (jsonArray.get(i).getAsJsonObject().get("name").getAsString()
                     .toLowerCase().equals("dog")) {
-                System.out.println(jsonArray.get(i).getAsJsonObject().get("name").getAsString());
+                //System.out.println(jsonArray.get(i).getAsJsonObject().get("name").getAsString());
                 if (jsonArray.get(i).getAsJsonObject().get("confidence").getAsDouble() >= minConfidence) {
-                    System.out.println(jsonArray.get(i).getAsJsonObject().get("confidence").getAsDouble());
+                    //System.out.println(jsonArray.get(i).getAsJsonObject().get("confidence").getAsDouble());
                     return true;
                 }
                 break;
             }
         }
-        System.out.println("here");
+        //System.out.println("here");
         return false;
     }
 
@@ -155,6 +155,21 @@ public final class RecognizePhoto {
      * @return true if you've Rickrolled yourself
      */
     public static boolean isRick (final String json) {
+        if (json == null) {
+            return false;
+        }
+        JsonElement jsonElement = new JsonParser().parse(json);
+        JsonArray jsonObject = jsonElement.getAsJsonObject().getAsJsonArray("categories");
+        JsonObject jsonObject1 = jsonObject.get(0).getAsJsonObject().getAsJsonObject("detail");
+        if (jsonObject1 == null) { return false; }
+        JsonArray jsonArray = jsonObject1.getAsJsonArray("celebrities");
+        if (jsonArray == null) { return false; }
+        for (int i = 0; i < jsonArray.size(); i++) {
+            if (jsonArray.get(i).getAsJsonObject().get("name").getAsString()
+                    .toLowerCase().equals("rick astley")) {
+                return true;
+            }
+        }
         return false;
     }
 }
