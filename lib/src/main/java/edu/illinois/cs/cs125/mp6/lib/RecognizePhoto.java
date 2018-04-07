@@ -159,15 +159,21 @@ public final class RecognizePhoto {
             return false;
         }
         JsonElement jsonElement = new JsonParser().parse(json);
-        JsonArray jsonObject = jsonElement.getAsJsonObject().getAsJsonArray("categories");
-        JsonObject jsonObject1 = jsonObject.get(0).getAsJsonObject().getAsJsonObject("detail");
-        if (jsonObject1 == null) { return false; }
-        JsonArray jsonArray = jsonObject1.getAsJsonArray("celebrities");
-        if (jsonArray == null) { return false; }
-        for (int i = 0; i < jsonArray.size(); i++) {
-            if (jsonArray.get(i).getAsJsonObject().get("name").getAsString()
-                    .toLowerCase().equals("rick astley")) {
-                return true;
+        JsonArray jsonArray1 = jsonElement.getAsJsonObject().getAsJsonArray("categories");
+        for (int j = 0; j < jsonArray1.size(); j++) {
+            JsonObject jsonObject1 = jsonArray1.get(j).getAsJsonObject().getAsJsonObject("detail");;
+            if (jsonObject1 == null) {
+                continue;
+            }
+            JsonArray jsonArray = jsonObject1.getAsJsonArray("celebrities");
+            if (jsonArray == null) {
+                return false;
+            }
+            for (int i = 0; i < jsonArray.size(); i++) {
+                if (jsonArray.get(i).getAsJsonObject().get("name").getAsString()
+                        .toLowerCase().equals("rick astley")) {
+                    return true;
+                }
             }
         }
         return false;
