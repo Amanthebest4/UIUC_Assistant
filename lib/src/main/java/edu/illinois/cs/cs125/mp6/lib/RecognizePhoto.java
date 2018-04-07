@@ -102,7 +102,7 @@ public final class RecognizePhoto {
         }
         for (int i = 0; i < jsonArray.size(); i++) {
             if (jsonArray.get(i).getAsJsonObject().get("name").getAsString()
-                    .toLowerCase().contains("dog")) {
+                    .toLowerCase().equals("dog")) {
                 System.out.println(jsonArray.get(i).getAsJsonObject().get("name").getAsString());
                 if (jsonArray.get(i).getAsJsonObject().get("confidence").getAsDouble() >= minConfidence) {
                     System.out.println(jsonArray.get(i).getAsJsonObject().get("confidence").getAsDouble());
@@ -135,7 +135,7 @@ public final class RecognizePhoto {
         if (jsonArray == null) { return false; }
         for (int i = 0; i < jsonArray.size(); i++) {
             if (jsonArray.get(i).getAsJsonObject().get("name").getAsString()
-                    .toLowerCase().contains("cat")) {
+                    .toLowerCase().equals("cat")) {
                 if (jsonArray.get(i).getAsJsonObject().get("confidence").getAsDouble() >= minConfidence) {
                     return true;
                 }
