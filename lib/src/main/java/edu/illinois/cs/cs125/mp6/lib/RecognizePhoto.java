@@ -90,6 +90,7 @@ public final class RecognizePhoto {
         if (json == null) {
             return false;
         }
+        System.out.println("minConfidence: " + minConfidence);
         JsonElement jsonElement = new JsonParser().parse(json);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         JsonArray jsonArray = jsonObject.getAsJsonArray("tags");
@@ -98,6 +99,7 @@ public final class RecognizePhoto {
             if (jsonArray.get(i).getAsJsonObject().get("name").getAsString()
                     .toLowerCase().contains("dog")) {
                 if (jsonArray.get(i).getAsJsonObject().get("confidence").getAsDouble() >= minConfidence) {
+                    System.out.println(jsonArray.get(i).getAsJsonObject().get("confidence").getAsDouble());
                     return true;
                 }
                 break;
