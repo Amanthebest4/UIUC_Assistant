@@ -337,7 +337,6 @@ public final class MainActivity extends AppCompatActivity {
          */
         int width = RecognizePhoto.getWidth(jsonResult);
         int height = RecognizePhoto.getHeight(jsonResult);
-        Log.d(TAG,jsonResult);
         Log.d(TAG,width + ", " + height);
         String format = RecognizePhoto.getFormat(jsonResult);
         Log.d(TAG, format);

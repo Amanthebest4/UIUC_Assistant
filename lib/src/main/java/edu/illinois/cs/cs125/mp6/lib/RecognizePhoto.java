@@ -16,6 +16,9 @@ public final class RecognizePhoto {
      * @return the width of the image or 0 on failure
      */
     public static int getWidth(final String json) {
+        if (json == null) {
+            return 0;
+        }
         JsonElement jsonElement = new JsonParser().parse(json);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         int width = jsonObject.getAsJsonObject("metadata").get("width").getAsInt();
@@ -29,6 +32,9 @@ public final class RecognizePhoto {
      * @return the width of the image or 0 on failure
      */
     public static int getHeight(final String json) {
+        if (json == null) {
+            return 0;
+        }
         JsonElement jsonElement = new JsonParser().parse(json);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         int height = jsonObject.getAsJsonObject("metadata").get("height").getAsInt();
@@ -42,6 +48,9 @@ public final class RecognizePhoto {
      * @return the type of the image or null
      */
     public static String getFormat(final String json) {
+        if (json == null) {
+            return null;
+        }
         JsonElement jsonElement = new JsonParser().parse(json);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         String format = jsonObject.getAsJsonObject("metadata").get("format").getAsString();
@@ -56,6 +65,9 @@ public final class RecognizePhoto {
      * @return the caption describing the image created by the Microsoft or null on failure
      */
     public static String getCaption(final String json) {
+        if (json == null) {
+            return null;
+        }
         JsonElement jsonElement = new JsonParser().parse(json);
         JsonObject jsonObject = jsonElement.getAsJsonObject().getAsJsonObject("description");
         JsonArray jsonArray = jsonObject.getAsJsonArray("captions");
@@ -75,6 +87,9 @@ public final class RecognizePhoto {
      * @return a boolean indicating whether the image contains a dog or false on failure
      */
     public static boolean isADog (final String json, double minConfidence) {
+        if (json == null) {
+            return false;
+        }
         JsonElement jsonElement = new JsonParser().parse(json);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         JsonArray jsonArray = jsonObject.getAsJsonArray("tags");
@@ -102,6 +117,9 @@ public final class RecognizePhoto {
      * @return a boolean indicating whether the image contains a dog or false on failure
      */
     public static boolean isACat (final String json, double minConfidence) {
+        if (json == null) {
+            return false;
+        }
         JsonElement jsonElement = new JsonParser().parse(json);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         JsonArray jsonArray = jsonObject.getAsJsonArray("tags");
