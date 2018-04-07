@@ -94,10 +94,16 @@ public final class RecognizePhoto {
         JsonElement jsonElement = new JsonParser().parse(json);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         JsonArray jsonArray = jsonObject.getAsJsonArray("tags");
-        if (jsonArray == null) { return false; }
+        if (jsonArray == null) {
+            return false;
+        }
+        if (jsonArray.size() == 0) {
+            System.out.println("null");
+        }
         for (int i = 0; i < jsonArray.size(); i++) {
             if (jsonArray.get(i).getAsJsonObject().get("name").getAsString()
                     .toLowerCase().contains("dog")) {
+                System.out.println(jsonArray.get(i).getAsJsonObject().get("name").getAsString());
                 if (jsonArray.get(i).getAsJsonObject().get("confidence").getAsDouble() >= minConfidence) {
                     System.out.println(jsonArray.get(i).getAsJsonObject().get("confidence").getAsDouble());
                     return true;
@@ -105,6 +111,7 @@ public final class RecognizePhoto {
                 break;
             }
         }
+        System.out.println("here");
         return false;
     }
 
