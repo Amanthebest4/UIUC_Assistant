@@ -5,6 +5,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+/**
+ * Image recognition class.
+ * Each function takes the JSON returned by the Microsoft Cognitive Services API
+ * and extracts some piece of information from it.
+ */
 public final class RecognizePhoto {
 
 
@@ -86,7 +91,7 @@ public final class RecognizePhoto {
      * @param minConfidence the minimum confidence required for this determination
      * @return a boolean indicating whether the image contains a dog or false on failure
      */
-    public static boolean isADog (final String json, double minConfidence) {
+    public static boolean isADog(final String json, final double minConfidence) {
         if (json == null) {
             return false;
         }
@@ -97,21 +102,16 @@ public final class RecognizePhoto {
         if (jsonArray == null) {
             return false;
         }
-//        if (jsonArray.size() == 0) {
-//            System.out.println("null");
-//        }
         for (int i = 0; i < jsonArray.size(); i++) {
             if (jsonArray.get(i).getAsJsonObject().get("name").getAsString()
                     .toLowerCase().equals("dog")) {
-                //System.out.println(jsonArray.get(i).getAsJsonObject().get("name").getAsString());
-                if (jsonArray.get(i).getAsJsonObject().get("confidence").getAsDouble() >= minConfidence) {
-                    //System.out.println(jsonArray.get(i).getAsJsonObject().get("confidence").getAsDouble());
+                if (jsonArray.get(i).getAsJsonObject().get("confidence").getAsDouble()
+                        >= minConfidence) {
                     return true;
                 }
                 break;
             }
         }
-        //System.out.println("here");
         return false;
     }
 
@@ -125,7 +125,7 @@ public final class RecognizePhoto {
      * @param minConfidence the minimum confidence required for this determination
      * @return a boolean indicating whether the image contains a dog or false on failure
      */
-    public static boolean isACat (final String json, double minConfidence) {
+    public static boolean isACat(final String json, final double minConfidence) {
         if (json == null) {
             return false;
         }
@@ -154,7 +154,7 @@ public final class RecognizePhoto {
      * @param json the JSON string returned by the Microsoft Cognitive Services API
      * @return true if you've Rickrolled yourself
      */
-    public static boolean isRick (final String json) {
+    public static boolean isRick(final String json) {
         if (json == null) {
             return false;
         }
